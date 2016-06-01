@@ -1,4 +1,3 @@
-# https://www.youtube.com/watch?v=2gunLuqHvc8
 import logging
 import os
 import requests
@@ -25,7 +24,11 @@ def strip_tags(html):
 saved_replies = [
     {
         'title': 'Blocked - Bots',
-        'keywords': ['agar', 'blocked', 'access', 'account', 'unblock'],
+        'keywords': ['agar', 'blocked', 'access my account', 'unblock'],
+    },
+    {
+        'title': 'Bug - Reported',
+        'keywords': ['ran into an issue', 'usersnap feedback', 'look into this'],
     },
     {
         'title': 'Education',
@@ -36,12 +39,48 @@ saved_replies = [
         'keywords': ['ftp', 'mount', 'sftp'],
     },
     {
+        'title': 'Invoices from Zuora',
+        'keywords': ['invoices'],
+    },
+    {
+        'title': 'Invoices from Zuora - Sent',
+        'keywords': ['invoices'],
+    },
+    {
+        'title': 'Job Applicant (Not hiring)',
+        'keywords': ['cv', 'resume', 'work at Cloud9']
+    },
+    {
+        'title': 'Monthly to yearly payments',
+        'keywords': ['monthly', 'year'],
+    },
+    {
+        'title': 'Red Alert Solved',
+        'keywords': ['unable to access your workspace']
+    },
+    {
+        'title': 'Solved (user reported)',
+        'keywords': ['seems to be good', 'solved', 'ignore this', 'all fine now'],
+    },
+    {
+        'title': 'Unstuck Workspace',
+        'keywords': ['access my workspace'],
+    },
+    {
         'title': 'Unsupported browser',
-        'keywords': ['internet explorer', 'mobile', 'iphone', 'ipad', 'android'],
+        'keywords': ['internet explorer', 'ie', 'mobile', 'iphone', 'ipad', 'android', 'tablet'],
     },
     {
         'title': 'Username change',
-        'keywords': ['change', 'mobile'],
+        'keywords': ['change my username'],
+    },
+    {
+        'title': 'Workspace extra large',
+        'keywords': ['gb'],
+    },
+    {
+        'title': 'Yearly signup mistake',
+        'keywords': ['monthly', 'year'],
     }
 ]
 
@@ -52,15 +91,6 @@ def test():
 @app.route('/reply', methods=['GET'])
 def returnAll():
     return jsonify({'saved_replies' : saved_replies})
-
-@app.route('/reply/<string:searchText>', methods=['GET'])
-def getReplies(searchText):
-    matchingReplies = list()
-    for reply in saved_replies:
-        for keyword in reply['keywords']:
-            if keyword in searchText:
-                matchingReplies.append(reply['title'])
-    return jsonify({"matches": matchingReplies})
     
 @app.route('/suggested_replies/<string:conversation_id>', methods=['GET'])
 def get_suggested_replies(conversation_id):
@@ -75,37 +105,14 @@ def get_suggested_replies(conversation_id):
     
     response = requests.request("GET", url, headers=headers)
     
-    user_question = strip_tags(response.json()['conversation_message']['body'])
+    user_question = strip_tags(response.json()['conversation_message']['body']).lower()
     
     matchingReplies = set()
     for reply in saved_replies:
         for keyword in reply['keywords']:
-            if keyword in user_question:
+            if (' ' + keyword) in user_question:
                 matchingReplies.add(reply['title'])
     return jsonify({"matches": list(matchingReplies)})
-
-
-
-
-
-
-@app.route('/reply', methods=['POST'])
-def newReply():
-    reply = {'title' : request.json['title']}
-    saved_replies.append(reply)
-    return jsonify({'saved_replies' : saved_replies })
-    
-@app.route('/reply/<string:title>', methods=['PUT'])
-def editOne(title):
-    replies = [reply for reply in saved_replies if reply['title'] == title]
-    replies[0]['title'] = request.json['title']
-    return jsonify({'reply': replies[0]})
-    
-@app.route('/reply/<string:title>', methods=['DELETE'])
-def removeOne(title):
-    replies = [reply for reply in saved_replies if reply['title'] == title]
-    saved_replies.remove(replies[0])
-    return jsonify({'saved_replies' : saved_replies })
 
 if __name__ == '__main__':
     app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)), debug=True)
