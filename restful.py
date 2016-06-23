@@ -106,16 +106,19 @@ def get_suggested_replies(conversation_id):
         if segment["id"] == "55954e0ef40cb51ffb000009":
             user_is_premium = True
 
-    replies_from_conversation = set()
+    suggested_replies = set()
     if not (user_is_premium):
-        replies_from_conversation.add('Community Redirect (Upsell)')
+        suggested_replies.add('Community Redirect (Upsell)')
 
     for reply in saved_replies:
         for keyword in reply['keywords']:
             key = " " + keyword
             if (key) in user_question:
-                replies_from_conversation.add(reply['title'])
-    return jsonify({"matches": list(replies_from_conversation)})
+                suggested_replies.add(reply['title'])
+    
+    if not suggested_replies:
+        suggested_replies.add("Bug - Reported")
+    return jsonify({"matches": list(suggested_replies)})
 
 
 @app.route('/get_conversation/<string:conversation_id>', methods=['GET'])
