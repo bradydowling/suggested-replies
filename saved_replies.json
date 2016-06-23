@@ -1,0 +1,82 @@
+[
+    {
+        "title": "Blocked - First Response",
+        "keywords": ["agar", "blocked", "access my account", "unblock", "banned"]
+    },
+    {
+        "title": "Bug - Reported",
+        "keywords": ["ran into an issue", "usersnap feedback", "look into this"]
+    },
+    {
+        "title": "Community Redirect (upsell)",
+        "keywords": ["ran into an issue", "usersnap feedback", "look into this"]
+    },
+    {
+        "title": "Education",
+        "keywords": ["university", "class", "school", "education"]
+    },
+    {
+        "title": "FTP Issues",
+        "keywords": ["ftp", "mount", "sftp"]
+    },
+    {
+        "title": "Invoices from Zuora",
+        "keywords": ["invoices"]
+    },
+    {
+        "title": "Invoices from Zuora - Sent",
+        "keywords": ["invoices"]
+    },
+    {
+        "title": "Job Applicant (Not hiring)",
+        "keywords": ["cv", "resume", "work at Cloud9"]
+    },
+    {
+        "title": "Monthly to yearly payments",
+        "keywords": ["monthly", "year"]
+    },
+    {
+        "title": "Red Alert Solved",
+        "keywords": ["unable to access your workspace"]
+    },
+    {
+        "title": "Refund - Downgrade First",
+        "keywords": ["refund", "billed", "thanks for your purchase with cloud9 ide"]
+    },
+    {
+        "title": "Refunded",
+        "keywords": ["refund", "billed", "thanks for your purchase with cloud9 ide"]
+    },
+    {
+        "title": "Share Email Reply",
+        "keywords": ["I've shared a workspace"]
+    },
+    {
+        "title": "Solved (user reported)",
+        "keywords": ["seems to be good", "solved", "ignore this", "all fine now"]
+    },
+    {
+        "title": "Unstuck Workspace",
+        "keywords": ["access my workspace"]
+    },
+    {
+        "title": "Unsubscribe",
+        "keywords": ["stop sending"]
+    },
+    {
+        "title": "Unsupported browser",
+        "keywords": ["internet explorer", "ie", "mobile", "iphone", "ipad", "android", "tablet"]
+    },
+    {
+        "title": "Username change",
+        "keywords": ["change my username"]
+    },
+    {
+        "title": "Workspace extra large",
+        "keywords": ["gb"]
+    },
+    {
+        "title": "Yearly signup mistake",
+        "keywords": ["monthly", "year"]
+    }
+]
