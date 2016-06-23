@@ -3,13 +3,13 @@ import os
 import requests
 import urllib
 import json
-from pprint import pprint
+import re
 from HTMLParser import HTMLParser
 from flask import Flask, jsonify, request
 from flask.ext.cors import CORS
 import talon
 from talon import quotations
-from nltk.stem.snowball import SnowballStemmer
+from nltk.corpus import stopwords
 
 talon.init()
 
@@ -59,9 +59,13 @@ def getConversationBody(conversation):
     logging.warn(user_question)
     return user_question
     
-def getConversationSubject(conversation):
+def guessConversationSubject(conversation):
+    stopWords = set(stopwords.words('english'))
+
     user_question = getConversationBody(conversation)
-    
+    user_question = re.sub("[^a-zA-Z]", " ", user_question)
+    subject = [word for word in user_question if not word in stopWords]
+    return subject
 
 def getIntercomUserID(conversation):
     user_id = conversation.json()['user']['id']
