@@ -103,7 +103,6 @@ def get_suggested_replies(conversation_id):
     user_id = getIntercomUserID(conversation)
     user_is_premium = False
     for segment in getIntercomUser(user_id).json()['segments']['segments']:
-        logging.warn(segment)
         if segment["id"] == "55954e0ef40cb51ffb000009":
             user_is_premium = True
 
