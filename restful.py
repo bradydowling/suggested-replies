@@ -100,12 +100,16 @@ def returnAll():
 def get_suggested_replies(conversation_id):
     conversation = getIntercomConversation(conversation_id)
     user_question = getConversationBody(conversation)
-    # user_id = getIntercomUserID(conversation)
-    # user_is_premium = getIntercomUser(user_id).json()['segments']['segments'] # need to loop through these segments and look for premium users id: 55954e0ef40cb51ffb000009
+    user_id = getIntercomUserID(conversation)
+    user_is_premium = False
+    for segment in getIntercomUser(user_id).json()['segments']['segments']:
+        if segment == "55954e0ef40cb51ffb000009":
+            user_is_premium = True
+            logging.warn("he's premium!")
 
     replies_from_conversation = set()
-    #if not (user_is_premium):
-    #    replies_from_conversation.add('Community Redirect')
+    if not (user_is_premium):
+        replies_from_conversation.add('Community Redirect (Upsell)')
 
     for reply in saved_replies:
         for keyword in reply['keywords']:
