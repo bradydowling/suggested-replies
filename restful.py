@@ -4,7 +4,7 @@ import requests
 import urllib
 import json
 from flask import Flask, jsonify, request
-from flask.ext.cors import CORS
+from flask_cors import CORS
 from HTMLParser import HTMLParser
 import re
 import talon
