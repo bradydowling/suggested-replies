@@ -95,21 +95,22 @@ def getAdmins():
 
 
 def assignConversation(conversation_id, assignee_id):
-    url = "https://api.intercom.io/conversations/" + conversation_id + "reply"
+    url = "https://api.intercom.io/conversations/" + conversation_id + "/reply"
 
     headers = {
         'accept': "application/json",
-        'authorization': "Basic MnljbHI5dmg6cm8tMzY2ZWM1ZWYxYTIyY2Q2MWQ4ODJkMzliY2E2MWEwY2NiOTBhZjYxMQ==",
+        'authorization': "Basic MnljbHI5dmg6ZDk4ZjcwYzIzNGZkMWZiMDE3MTJiMzJmMTg5ZTIzZGIwNDVjMzAyNw==",
         'cache-control': "no-cache",
+        'content-type': 'application/json'
     }
-    
+
     data = {
-      "type": "admin",
-      "message_type": "assignment",
-      "admin_id": BRADY,
-      "assignee_id": assignee_id
+        "type": "admin",
+        "admin_id": BRADY,
+        "message_type": "assignment",
+        "assignee_id": assignee_id
     }
-    
+
     data = json.dumps(data)
 
     response = requests.request("POST", url, headers=headers, data=data)
@@ -118,11 +119,11 @@ def assignConversation(conversation_id, assignee_id):
 
 
 def makeNote(conversation_id, body):
-    url = "https://api.intercom.io/conversations/" + conversation_id + "reply"
+    url = "https://api.intercom.io/conversations/" + conversation_id + "/reply"
 
     headers = {
         'accept': "application/json",
-        'authorization': "Basic MnljbHI5dmg6cm8tMzY2ZWM1ZWYxYTIyY2Q2MWQ4ODJkMzliY2E2MWEwY2NiOTBhZjYxMQ==",
+        'authorization': "Basic MnljbHI5dmg6ZDk4ZjcwYzIzNGZkMWZiMDE3MTJiMzJmMTg5ZTIzZGIwNDVjMzAyNw==",
         'cache-control': "no-cache",
         'content-type': 'application/json'
     }
